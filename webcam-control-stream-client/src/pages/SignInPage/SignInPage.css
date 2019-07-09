@@ -1,0 +1,13 @@
+.sign-in-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    text-align: center;
+}
+
+.sing-in-page_form-section {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
