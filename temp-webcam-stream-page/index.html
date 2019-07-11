@@ -6,35 +6,17 @@
 <body>
 <video autoplay></video>
 <script>
-    // get video dom element
-    const video = document.querySelector('video');
+    navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true
+    }).then(stream => {
+        const videoTracks = stream.getVideoTracks();
+        const track = videoTracks[0];
+        console.log(`Getting video from: ${track.label}`);
 
-    // request access to webcam
-    navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
-
-    // returns a frame encoded in base64
-    const getFrame = () => {
-        /* const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext('2d').drawImage(video, 0, 0);
-        const data = canvas.toDataURL('image/png');
-        return data; */
-        video.srcObject.getVideoTracks();
-    };
-
-    const WS_URL = location.origin.replace(/^http/, 'ws') + '/api/v1/webcam-stream';
-    const FPS = 1;
-    const ws = new WebSocket(WS_URL);
-
-    ws.onopen = () => {
-        console.log(`Connected to ${WS_URL}`);
-        setInterval(() => {
-            const frame = getFrame();
-            ws.send(getFrame());
-            console.log('sending frame ');
-        }, 1000 / FPS);
-    };
+        document.querySelector('video').srcObject = stream;
+    })
+        .catch(error => console.error(error));
 </script>
 </body>
 </html>

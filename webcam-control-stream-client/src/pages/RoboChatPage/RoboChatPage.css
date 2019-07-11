@@ -1,0 +1,12 @@
+.robo-chat-page {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+
+    grid-template-columns: auto 20%;
+    grid-template-rows: auto 10%;
+}
+
+.command-input {
+   grid-column: 1 / span 2;
+}

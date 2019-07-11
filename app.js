@@ -17,21 +17,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // client
-app.use(express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
+
 
 // streamer source
 app.use('/streamer', express.static(path.join(__dirname, 'temp-webcam-stream-page/')));
 
-// ignore ws api
-// app.use('/api/v1/webcam-stream', (_, __, next) => next());
-
-// api
-// app.use('/api/v1', indexRouter);
-
-// catch 404 and forward to error handler
-/* app.use(function(req, res, next) {
-  next(createError(404));
-}); */
+app.use('/app/robo-chat/', express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
+app.use('/app/sign-in/', express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
+app.use(express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
+// TODO fix manifest json
 
 // error handler
 app.use(function(err, req, res, next) {
