@@ -4,13 +4,15 @@ const server = require('./bin/www');
 
 const wsServer = new WebSocket.Server({server}, {path: '/api/v1/webcam-stream'});
 
-const users = {};
+let user = null;
+let streamer = null;
+
+const sendTo = (ws, message) => {
+    ws.send(JSON.stringify(message));
+};
 
 wsServer.on('connection', connection = (wsClientConnection) => {
     console.log('client connected ');
-
-    const sendTo = (ws, message) => {
-        wsClientConnection.send(JSON.stringify(message));
 
     wsClientConnection.on('message', message => {
         console.log(`Received message => ${message}`);
@@ -23,17 +25,35 @@ wsServer.on('connection', connection = (wsClientConnection) => {
             data = {}
         }
 
-        const {name} = data.credentials;
-
         switch (data.type) {
             case 'login':
+                const name = data.credentials['name-field'];
                 console.log('User logged', name);
-
-                users[name] = wsClientConnection;
                 wsClientConnection.name = name;
-                sendTo(wsClientConnection, {type: 'login', success: true});
 
+                if (name === 'streamer') streamer = wsClientConnection;
+                else user = wsClientConnection;
+
+                sendTo(wsClientConnection, {type: 'login', success: true});
                 break;
+            case 'offer':
+                if (user) {
+                    console.log('Sending offer to: ', user.name);
+
+                    sendTo(user, {
+                        type: 'offer',
+                        offer: data.offer,
+                        username: user.name
+                    })
+                }
+            case 'answer':
+                console.log('Sending answer to: ', streamer.name);
+                if (streamer) {
+                    sendTo(streamer, {
+                        type: 'answer',
+                        answer: data.answer
+                    })
+                }
         }
     });
 
