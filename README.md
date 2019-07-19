@@ -26,6 +26,7 @@ $ bash stream-camera.linux.sh #stream your default device
 ```
 
 To stop you can invoke `npm run stop`
+To see logs you can invoke `npm run log`
 
 Info about webcam streaming: [https://trac.ffmpeg.org/wiki/Capture/Webcam](https://trac.ffmpeg.org/wiki/Capture/Webcam)
 

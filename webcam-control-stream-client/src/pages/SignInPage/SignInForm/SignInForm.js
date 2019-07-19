@@ -24,7 +24,7 @@ const validate = async values => {
 const SignInForm = () => {
     const handleSubmit = (credentials) => {
         saveCredentials(credentials);
-        history.push(ROBO_CHAT_URL);
+        window.location.href = ROBO_CHAT_URL;
     };
 
     return (

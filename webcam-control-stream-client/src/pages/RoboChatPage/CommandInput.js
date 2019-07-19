@@ -23,7 +23,7 @@ const CommandInput = (props) => {
     };
 
     return (
-        <Card>
+        <Card className="command-input">
             <TextField
                 label={`Command line, max ${MAX_COMMAND_LENGTH} symbols`}
                 style={{margin: 8}}

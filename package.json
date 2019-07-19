@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/.bin/pm2 start bin/www -- --port 3001 --log webcam-control-stream-service.log.txt --time",
+    "start": "node_modules/.bin/pm2 start bin/www -- -i max --log webcam-control-stream-service.log.txt --time && node_modules/.bin/pm2 monit",
     "stop": "node_modules/.bin/pm2 stop www",
     "log": "node_modules/.bin/pm2 logs",
     "build": "cd webcam-control-stream-client && npm run build && cd ..",
