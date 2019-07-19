@@ -5,7 +5,7 @@
 ### Prerequisites
 
 1. Node & npm
-2. ffmpeg 
+2. ffmpeg
 
 ```
 $ sudo apt update
@@ -28,5 +28,10 @@ $ bash stream-camera.linux.sh #stream your default device
 To stop you can invoke `npm run stop`
 
 Info about webcam streaming: [https://trac.ffmpeg.org/wiki/Capture/Webcam](https://trac.ffmpeg.org/wiki/Capture/Webcam)
+
+## Some app info
+
+* `:3001/api/v1/webcam-stream` - video stream
+* `:3002/api/v1/users` - users list, sign in new user
 
 

@@ -8,7 +8,8 @@ var app = require('../app');
 var debug = require('debug')('webcam-control-stream-service:server');
 var http = require('http');
 
-const streamBroadcastWSServer = require('../streamBroadcastWSServer');
+require('../wsClientDataServer');
+const wsStreamServer = require('../wsStreamServer');
 
 /**
  * Get port from environment and store in Express.
@@ -91,10 +92,11 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-const streamServer = streamBroadcastWSServer.getStreamBroadcastWSServer(server);
+const streamServer = wsStreamServer.getWSStreamServer(server);
 
 app.use('/stream-receiver', (request, response) => {
   response.connection.setTimeout(0);
+
   console.log(
       'Stream Connected: ' +
       request.socket.remoteAddress + ':' +
