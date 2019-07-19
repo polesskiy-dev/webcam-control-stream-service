@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 import './RoboChatPage.css';
 import RoboVideo from './RoboVideo/RoboVideo';
 import UsersList from './UsersList/UsersList';
-import usersService from '../../services/users.service';
+import CommandInput from './CommandInput';
+import userConnectionService from '../../services/user-connection.service';
 
 const RoboChatPage = () => {
     useEffect(() => {
-        usersService.signIn();
+        userConnectionService.signIn();
     }, []);
 
     return (<div className="robo-chat-page">
         <RoboVideo />
         <UsersList />
-        <section className="command-input"></section>
+        <CommandInput />
     </div>)
 };
 

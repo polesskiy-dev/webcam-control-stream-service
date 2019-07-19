@@ -1,0 +1,4 @@
+.robo-video canvas {
+    width: 99%;
+    object-fit: cover;
+}

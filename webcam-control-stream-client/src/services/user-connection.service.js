@@ -7,12 +7,13 @@ export const usersListEvents = {
     USERS_LIST_UPDATE: 'users-list-update',
 };
 
-class UsersService {
+class UserConnectionService {
     constructor() {
         this.ws = new WebSocket(WS_URL);
 
+        // TODO separate messages by type
         this.ws.onmessage = (message) => {
-            document.dispatchEvent(new CustomEvent(usersListEvents.USERS_LIST_UPDATE, { 'detail': JSON.parse(message.data) }));
+            document.dispatchEvent(new CustomEvent(usersListEvents.USERS_LIST_UPDATE, { 'detail': JSON.parse(message.data).users }));
         }
     };
 
@@ -22,4 +23,4 @@ class UsersService {
     }
 }
 
-export default new UsersService();
+export default new UserConnectionService();

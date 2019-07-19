@@ -20,7 +20,7 @@ const App = () => (
             />
             <Route
                 path="/"
-                component={() => <Redirect to={SIGN_IN_URL} />}
+                component={() => <Redirect to={ROBO_CHAT_URL} />}
             />
         </Switch>
     </Router>

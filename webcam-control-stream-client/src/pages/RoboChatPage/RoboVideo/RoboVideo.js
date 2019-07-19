@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import './RoboVideo.css';
+
 const WS_URL = window.location.origin.replace(/^http/, 'ws') + '/api/v1/webcam-stream';
 
 console.log('Stream url: ', WS_URL);
