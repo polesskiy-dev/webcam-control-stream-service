@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 
@@ -16,12 +17,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(cors());
+
 // client
-
-
-// streamer source
-app.use('/streamer', express.static(path.join(__dirname, 'temp-webcam-stream-page/')));
-
 app.use('/app/robo-chat/', express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
 app.use('/app/sign-in/', express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
 app.use(express.static(path.join(__dirname, 'webcam-control-stream-client/build')));
